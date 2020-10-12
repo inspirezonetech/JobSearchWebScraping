@@ -1,20 +1,23 @@
 # JobSearchWebScraping
-Go to a job website, perform search and export job postings title and link to a file.
+Go to a job postings website, perform search and export job title and description link to a file.
 
-A full tutorial for this program is detailed on the [inspirezone.tech](https://inspirezone.tech) blog post: [Learn web scraping with python in minutes: The basics using selenium](https://inspirezone.tech/learn-web-scraping-with-python-in-minutes/)
+A full tutorial for this program is detailed on the [inspirezone.tech](https://inspirezone.tech) blog post: [Learn web scraping with python in minutes: The basics using selenium](https://inspirezone.tech/learn-web-scraping-with-python-in-minutes/). 
 
+*See "blog-tutorial-original-code/job-search-web-scraping.py" for the original tutorial code.*
+
+*You are welcome to contribute to this repo. See the **CONTRIBUTING.md** for more info*
 
 ## What this program does 
 
-This is a web scraper written in python, using the selenium package. It will:
+This is a web scraper written in python using the [selenium](https://www.selenium.dev/) package. It will:
 - Launch indeed.com/worldwide
 - Perform a search for "machine learning"
-- Export each job title and link to the job posting to a file
+- Export each job posting title and link to a file
 
 
 ## How to use
 
-### Browser and driver 
+### Download browser and driver 
 You need to have either Firefox or Chrome installed. You also need the corresponding driver for the browser.
 
 For Firefox download geckodriver:
@@ -39,6 +42,7 @@ pip install selenium
 ```
 
 ### Run program
+
 ```
 python job-search-web-scraping.py
 ```
