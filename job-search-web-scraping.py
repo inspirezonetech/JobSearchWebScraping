@@ -1,22 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+import config as cfg
 
 def indeed_job_search():
-    
+
     PATH_TO_DRIVER = './geckodriver'
 
     browser = webdriver.Firefox(executable_path=PATH_TO_DRIVER)
 
     browser.get('https://www.indeed.com/worldwide')
 
-    browser.implicitly_wait(5) 
+    browser.implicitly_wait(5)
 
     search_bar = browser.find_element_by_name('q')
-    search_bar.send_keys('machine learning')
+    search_bar.send_keys(cfg.config['keyword'])
     search_bar.send_keys(Keys.ENTER)
 
-    browser.implicitly_wait(5) 
+    browser.implicitly_wait(5)
 
     search_results = browser.find_elements_by_xpath('//h2/a')
 
