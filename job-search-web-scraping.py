@@ -14,6 +14,8 @@ def indeed_job_search():
 
     search_bar = browser.find_element_by_name('q')
     search_bar.send_keys('machine learning')
+    search_bar = browser.find_element_by_name('l')
+    search_bar.send_keys('New York')
     search_bar.send_keys(Keys.ENTER)
 
     browser.implicitly_wait(5) 
