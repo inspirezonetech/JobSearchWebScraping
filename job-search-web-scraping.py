@@ -19,16 +19,26 @@ def indeed_job_search():
     browser.implicitly_wait(5) 
 
     search_results = browser.find_elements_by_xpath('//h2/a')
-
+    search_descriptions=browser.find_elements_by_xpath('//div[@class="summary"]')
+    
+    descriptions=[]
+    for element in search_descriptions:
+        job_description=element.text
+        descriptions.append(job_description)
+        
     file = open("job_search.txt", 'a')
     file.write("\n")
-
+    
+    index=0
     for job_element in search_results:
 
         job_title = job_element.text
         job_link = job_element.get_attribute('href')
+        
 
-        file.write("%s | link: %s \n" %(job_title, job_link))
+        file.write("%s | link: %s | description: %s \n" %(job_title, job_link, descriptions[index]))
+        index=index+1
+
 
     browser.close()
 
