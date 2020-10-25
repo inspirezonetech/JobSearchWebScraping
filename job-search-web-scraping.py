@@ -1,12 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from pathlib import Path
 
 
 def indeed_job_search():
     
-    PATH_TO_DRIVER = './geckodriver'
+    browser = None
 
-    browser = webdriver.Firefox(executable_path=PATH_TO_DRIVER)
+    PATH_TO_GECKO_DRIVER = './geckodriver'
+    PATH_TO_CHROME_DRIVER = './chromedriver'
+
+    if Path(PATH_TO_GECKO_DRIVER).is_file():
+        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER)
+    elif Path(PATH_TO_CHROME_DRIVER).is_file():
+        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER)
+    else:
+        print("Unable to find a webdriver.")
+        return
 
     browser.get('https://www.indeed.com/worldwide')
 
