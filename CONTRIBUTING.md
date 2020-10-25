@@ -16,38 +16,22 @@ You don't have to join to contribute to this project. However, joining will give
 - It's fun to improve your skills by working with others!
 
 
+## Please make sure you are assigned to an [Issue](https://github.com/inspirezonetech/JobSearchWebScraping/issues) before submitting a pull request
+Go to the [issue](https://github.com/inspirezonetech/JobSearchWebScraping/issues) page and either
+- Request to be assigned to an existing issue
+or
+- Create your own issue and use one of the templates provided. Wait for approval and to be assigned the issue before submitting a pull request
+
+
 ## Contributions you can make to this project
 
 Use this repo to practice your **python**, **web scraping skills** or **learn how to contribute to public projects**. 
 You can:
 
-- Propose a new feature
+- Add or propose a new feature
 - Discuss current state of code
 - Report a bug
 - Submit a fix
-
-## Suggested TODOs
-
-This project is simply a base for you to add onto in whichever way you propose. 
-Here are some tasks that are waiting to be done and you can get working on right away.
-
-### Scale Application
-- Expand to search other job posting websites all in one go
-- Read list of job websites to scrape from a file located in working directory
-- Expand to specify other job criteria e.g. machine learning, located in London, years of experience required, etc...
-
-### Add Features 
-- Export a small snippet of job description along with the title and link.
-- Read job search keyword from a file located in working directory
-- Expand to retrieve search results for more than one page e.g. pages 1 - 5
-
-### Add Improvements / Error handling
-- Add exception handling 
-- Add support for more web browsers
-- Test it works OK on windows and other Linux distros (tested on Ubuntu so far)
-
-### Fix Bugs
-- None reported yet
 
 
 ## How to submit your code
