@@ -1,9 +1,12 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 INDEED_URL = "https://www.indeed.com/worldwide"
-PATH_TO_DRIVER = "./geckodriver"
+PATH_TO_DRIVER = "./geckodriver/geckodriver.exe"
 WAIT_TIME = 5
 PAGES = 10
 
@@ -42,32 +45,42 @@ def get_jobs(browser):
 
 def close_popup_if_present(browser):
     try:
-        popup_cross = browser.find_element_by_class_name("popover-x-button-close")
-        popup_cross.click()
+
+        popup_cross = browser.find_elements_by_xpath(
+            "//button[contains(@class,'popover-x-button-close')]"
+        )
+        popup_cross[0].click()
+        return True
     except:
-        pass
+        return False
 
 
 def clean_up(browser, file):
-    browser.close()
+    try:
+        browser.close()
+    except:
+        pass
     file.close()
 
 
 def indeed_job_search(search_term, pages=10, driver_path="./geckodriver"):
+    popup_encountered = False
     browser = initial_search(search_term, driver_path)
     file = initialize_file(search_term)
     page_number = 1
     while True:
+        if not popup_encountered:
+            time.sleep(WAIT_TIME)
+            popup_encountered = close_popup_if_present(browser)
         search_results = get_jobs(browser)
         [write_job(job_element, file) for job_element in search_results]
         try:
+            browser.implicitly_wait(WAIT_TIME)
             next_button = browser.find_element_by_xpath("//a[@aria-label='Next']")
             if page_number == pages:
                 clean_up(browser, file)
             next_button.click()
             page_number += 1
-            browser.implicitly_wait(WAIT_TIME)
-            close_popup_if_present(browser)
         except Exception:
             clean_up(browser, file)
             exit
