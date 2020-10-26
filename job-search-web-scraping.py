@@ -2,8 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from pathlib import Path
 
+import sys
 
-def indeed_job_search():
+def indeed_job_search(*args):
     
     browser = None
 
@@ -11,9 +12,15 @@ def indeed_job_search():
     PATH_TO_CHROME_DRIVER = './chromedriver'
 
     if Path(PATH_TO_GECKO_DRIVER).is_file():
-        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER)
+        options = webdriver.FirefoxOptions()
+        if 'headless' in args:
+            options.headless = True
+        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER, options=options)
     elif Path(PATH_TO_CHROME_DRIVER).is_file():
-        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER)
+        options = webdriver.ChromeOptions()
+        if 'headless' in args:
+            options.headless = True
+        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER, options=options)
     else:
         print("Unable to find a webdriver.")
         return
@@ -45,4 +52,4 @@ def indeed_job_search():
     browser.close()
 
 if __name__ == "__main__":
-    indeed_job_search()
+    indeed_job_search(*sys.argv)

@@ -47,4 +47,9 @@ pip install selenium
 python job-search-web-scraping.py
 ```
 
+You can run the program in headless mode adding the *headless* argument
+
+```
+python job-search-web-scraping.py headless
+```
 
