@@ -7,6 +7,8 @@ A full tutorial for this program is detailed on the [inspirezone.tech](https://i
 
 *You are welcome to contribute to this repo. See the **CONTRIBUTING.md** for more info*
 
+![JobSearchWebScraping](https://inspirezone.tech/wp-content/uploads/2020/10/webscraping-python-selenium-1024x512.png)
+
 ## What this program does 
 
 This is a web scraper written in python using the [selenium](https://www.selenium.dev/) package. It will:
