@@ -31,21 +31,52 @@ You can:
 - Add or propose a new feature
 - Discuss current state of code
 - Report a bug
-- Submit a fix
+- Submit a bug fix
+- Help with documentation
+- Make any suggestion for improvement
 
 
-## How to submit your code
+## How to submit your code - step by step guide
 
-Please use pull requests. See the [Github docs](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests) for details on pull requests.
+Please use pull requests. See the [Github docs](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests) for details on how pull requests work.
 
-The steps to follow are:
-1. Fork this repo
-2. Clone it locally
-3. Add this repo as the remote upstream and keep it synced
-4. Create a new branch
-5. Make your changes
-6. Commit using messages describing your changes
-7. Push to your Fork
-8. Create a pull request to this repo on Github
-9. Respond to code review comments and feedback
+Steps to make your contribution:
+
+### 1. Fork this repo
+
+### 2. Clone it locally
+
+### 3. Add this repo as the remote upstream and keep it synced by pulling from upstream
+```
+git remote add upstream https://github.com/inspirezonetech/JobSearchWebScraping.git
+
+git pull upstream main
+```
+
+### 4. Create a new branch and checkout to the branch
+```
+ git checkout -b your-branch
+```
+
+### 5. Make your changes and test it works
+
+### 6. Commit your changes
+```
+git commit -m "commit message describing change"
+```
+
+### 7. Push to your Fork
+```
+git push origin your-branch
+```
+
+### 8. Go to your Fork on Github and create a pull request to this repo on Github. Fill in the PR submission form.
+
+### 9. If needed, respond to code review comments and feedback
+
+### 10. If all goes well, your changes will be merged. Congrats!
+
+## License
+
+By contributing, you agree that your contributions will be licensed under its MIT License.
 
