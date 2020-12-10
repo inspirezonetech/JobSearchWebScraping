@@ -4,8 +4,9 @@ from pathlib import Path
 
 import sys
 
+
 def indeed_job_search(*args):
-    
+
     browser = None
 
     PATH_TO_GECKO_DRIVER = './geckodriver'
@@ -27,7 +28,7 @@ def indeed_job_search(*args):
 
     browser.get('https://www.indeed.com/worldwide')
 
-    browser.implicitly_wait(5) 
+    browser.implicitly_wait(5)
 
     search_bar = browser.find_element_by_name('q')
     search_bar.send_keys('machine learning')
@@ -35,7 +36,7 @@ def indeed_job_search(*args):
     search_bar.send_keys('New York')
     search_bar.send_keys(Keys.ENTER)
 
-    browser.implicitly_wait(5) 
+    browser.implicitly_wait(5)
 
     search_results = browser.find_elements_by_xpath('//h2/a')
 
@@ -47,9 +48,10 @@ def indeed_job_search(*args):
         job_title = job_element.text
         job_link = job_element.get_attribute('href')
 
-        file.write("%s | link: %s \n" %(job_title, job_link))
+        file.write("%s | link: %s \n" % (job_title, job_link))
 
     browser.close()
+
 
 if __name__ == "__main__":
     indeed_job_search(*sys.argv)
