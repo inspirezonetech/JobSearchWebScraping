@@ -6,7 +6,7 @@ All inputs are welcome!
 
 [inspirezone.tech](https://inspirezone.tech) is an online tech blog and community that focuses on encouraging developers of all levels of experience to improve their skills through online collaboration.
 
-You can join the inspirezone community by [using this form](https://inspirezone.tech/get-in-touch/) on our website. 
+You can join the inspirezone community by [using this form](https://inspirezone.tech/get-in-touch/#join) on our website. 
 You don't have to join to contribute to this project. However, joining will give you a number of advantages such as:
 - You can join our Github community page
 - Have discussions with other members of our community
@@ -22,19 +22,40 @@ Go to the [issue](https://github.com/inspirezonetech/JobSearchWebScraping/issues
 or
 - Create your own issue and use one of the templates provided. Wait for approval and to be assigned the issue before submitting a pull request
 
+**Note:** You can only be assigned to one issue at a time. Please clear your assigned issue before requesting to be assigned to another.
 
 ## Contributions you can make to this project
 
 Use this repo to practice your **python**, **web scraping skills** or **learn how to contribute to public projects**. 
 You can:
 
-- Add or propose a new feature
-- Discuss current state of code
+- Add a new feature
 - Report a bug
 - Submit a bug fix
 - Help with documentation
+- Discuss current state of code
 - Make any suggestion for improvement
 
+## Guidelines for adding a new feature to the script
+
+- Please make sure you've made your intention known first in the [issues](https://github.com/inspirezonetech/JobSearchWebScraping/issues) section
+- Outline in the relevant issue how you may go about adding this feature
+- New features should be added as a separate function if possible
+
+## Use [flake8]((https://flake8.pycqa.org/en/latest/)) linting to ensure format of code is consistent with repo
+
+Run flake8 on your python file before submitting.
+
+The following flake8 error can be excluded:
+- `line too long (x > x characters) flake8(E501)`
+
+How to run flake8 link check on your code using command line:
+```
+python -m pip install flake8
+
+# runs flake8 and ignores the excluded error check
+flake8 path/to/code/to/check.py --ignore E501
+```
 
 ## How to submit your code - step by step guide
 
