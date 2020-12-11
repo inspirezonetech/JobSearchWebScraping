@@ -49,7 +49,7 @@ Run flake8 on your python file before submitting.
 The following flake8 error can be excluded:
 - `line too long (x > x characters) flake8(E501)`
 
-How to run flake8 link check on your code using command line:
+How to run flake8 lint check on your code using command line:
 ```
 python -m pip install flake8
 
