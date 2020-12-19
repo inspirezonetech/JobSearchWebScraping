@@ -74,16 +74,3 @@ class Gmailer:
 
     def closeConnection(self):
         self.server.close()
-
-
-if __name__ == '__main__':
-	# init our Gmailer class and use it
-	blah = Gmailer(username=cfg["sender_mail"], password=cfg["password"])
-	FROM = cfg["sender_mail"]
-	TO = ["reciever@gmail.com", "reciever2@gmail.com"] 
-	SUBJECT = "This is my subject"
-	BODY = "body"
-	FILE_PATH = "test.txt"
-
-	blah.send(FROM=FROM, TO=TO, SUBJECT=SUBJECT, BODY=BODY)
-	blah.closeConnection()
