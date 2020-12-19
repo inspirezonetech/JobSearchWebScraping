@@ -1,13 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from pathlib import Path
-from config import cfg 
+from config import cfg
 from utils.mail import Gmailer
 import sys
 
 
 def indeed_job_search(*args):
-
     browser = None
 
     PATH_TO_GECKO_DRIVER = './geckodriver'
@@ -45,24 +44,21 @@ def indeed_job_search(*args):
     file.write("\n")
 
     for job_element in search_results:
-
         job_title = job_element.text
         job_link = job_element.get_attribute('href')
 
         file.write("%s | link: %s \n" % (job_title, job_link))
 
     gmailer = Gmailer(username=cfg["sender_email"], password=cfg["sender_password"])
-    FILE_PATH = "job_search.txt"
-    gmailer.send(FROM=cfg["sender_email"], 
-                TO=cfg["receiver_email"], 
-                SUBJECT=cfg["subject_email"], 
-                BODY=cfg["body_email"], 
-                FILE_PATH=FILE_PATH)
+    gmailer.send(sender=cfg["sender_email"],
+                 receiver=cfg["receiver_email"],
+                 subject=cfg["subject_email"],
+                 body=cfg["body_email"],
+                 file_path="job_search.txt")
     gmailer.closeConnection()
 
     browser.close()
 
-    
 
 if __name__ == "__main__":
     indeed_job_search(*sys.argv)
