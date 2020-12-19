@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from pathlib import Path
-
+from config import cfg 
+from utils.mail import Gmailer
 import sys
 
 
@@ -31,7 +32,7 @@ def indeed_job_search(*args):
     browser.implicitly_wait(5)
 
     search_bar = browser.find_element_by_name('q')
-    search_bar.send_keys('machine learning')
+    search_bar.send_keys(cfg['keyword'])
     search_bar = browser.find_element_by_name('l')
     search_bar.send_keys('New York')
     search_bar.send_keys(Keys.ENTER)
@@ -50,8 +51,18 @@ def indeed_job_search(*args):
 
         file.write("%s | link: %s \n" % (job_title, job_link))
 
+    gmailer = Gmailer(username=cfg["sender_email"], password=cfg["sender_password"])
+    FILE_PATH = "job_search.txt"
+    gmailer.send(FROM=cfg["sender_email"], 
+                TO=cfg["receiver_email"], 
+                SUBJECT=cfg["subject_email"], 
+                BODY=cfg["body_email"], 
+                FILE_PATH=FILE_PATH)
+    gmailer.closeConnection()
+
     browser.close()
 
+    
 
 if __name__ == "__main__":
     indeed_job_search(*sys.argv)
