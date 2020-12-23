@@ -2,8 +2,54 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from pathlib import Path
 from config import cfg
-from utils.mail import Gmailer
 import sys
+import smtplib
+from email.message import EmailMessage
+from email.mime.application import MIMEApplication
+from os.path import basename
+
+
+def send_email(sender_email_address, email_password, receiver_email_address, email_subject, file_path):
+    """
+    sender_email_address: sender email address
+    email_password: sender email password
+    receiver_email_address: receiver email password
+    email_subject: email subject
+    file_path: file to attach in the email
+    """
+    email_smtp = "smtp.gmail.com"
+    # create an email message object
+    message = EmailMessage()
+    # configure email headers
+    message['Subject'] = email_subject
+    message['From'] = sender_email_address
+    message['To'] = receiver_email_address
+
+    # set email body text
+    message.set_content("Hello from Python!")
+    # attach the text file
+    with open(file_path, "rb") as fil:
+        part = MIMEApplication(
+            fil.read(),
+            Name=basename(file_path)
+        )
+    # After the file is closed
+    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(file_path)
+    message.attach(part)
+
+    # set smtp server and port
+    server = smtplib.SMTP(email_smtp, '587')
+    # identify this client to the SMTP server
+    server.ehlo()
+    # secure the SMTP connection
+    server.starttls()
+
+    # login to email account
+    server.login(sender_email_address, email_password)
+    # send email
+    server.send_message(message)
+    # close connection to server
+    server.quit()
 
 
 def indeed_job_search(*args):
@@ -48,14 +94,10 @@ def indeed_job_search(*args):
         job_link = job_element.get_attribute('href')
 
         file.write("%s | link: %s \n" % (job_title, job_link))
-
-    gmailer = Gmailer(username=cfg["sender_email"], password=cfg["sender_password"])
-    gmailer.send(sender=cfg["sender_email"],
-                 receiver=cfg["receiver_email"],
-                 subject=cfg["subject_email"],
-                 body=cfg["body_email"],
-                 file_path="job_search.txt")
-    gmailer.closeConnection()
+    send_email(cfg["sender_email"], cfg["sender_password"],
+               cfg["receiver_email"],
+               cfg["subject_email"],
+               "job_search.txt")
 
     browser.close()
 
