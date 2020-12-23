@@ -26,7 +26,7 @@ def send_email(sender_email_address, email_password, receiver_email_address, ema
     message['To'] = receiver_email_address
 
     # set email body text
-    message.set_content("Hello from Python!")
+    message.set_content("Jobs for you!!")
     # attach the text file
     with open(file_path, "rb") as fil:
         part = MIMEApplication(
