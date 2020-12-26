@@ -5,36 +5,34 @@ from config import cfg
 import sys
 import smtplib
 from email.message import EmailMessage
+from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
 from os.path import basename
 
 
-def send_email(sender_email_address, email_password, receiver_email_address, email_subject, file_path):
+def send_email(sender_email_address, email_password, receiver_email_address, email_subject, email_body, file_path):
     """
     sender_email_address: sender email address
     email_password: sender email password
     receiver_email_address: receiver email password
     email_subject: email subject
+    email_body: email body
     file_path: file to attach in the email
     """
     email_smtp = "smtp.gmail.com"
     # create an email message object
-    message = EmailMessage()
+    message = MIMEMultipart()
     # configure email headers
-    message['Subject'] = email_subject
+    message['subject'] = email_subject
     message['From'] = sender_email_address
     message['To'] = receiver_email_address
 
-    # set email body text
-    message.set_content("Jobs for you!!")
     # attach the text file
-    with open(file_path, "rb") as fil:
-        part = MIMEApplication(
-            fil.read(),
-            Name=basename(file_path)
-        )
-    # After the file is closed
-    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(file_path)
+    message.attach(MIMEText(email_body))
+    part = MIMEApplication(open(file_path).read())
+    part.add_header('Content-Disposition',
+                    'attachment; filename="%s"' % basename(file_path))
     message.attach(part)
 
     # set smtp server and port
@@ -43,7 +41,7 @@ def send_email(sender_email_address, email_password, receiver_email_address, ema
     server.ehlo()
     # secure the SMTP connection
     server.starttls()
-
+    server.ehlo()
     # login to email account
     server.login(sender_email_address, email_password)
     # send email
@@ -56,7 +54,7 @@ def indeed_job_search(*args):
     browser = None
 
     PATH_TO_GECKO_DRIVER = './geckodriver'
-    PATH_TO_CHROME_DRIVER = './chromedriver'
+    PATH_TO_CHROME_DRIVER = '/usr/local/bin/chromedriver'
 
     if Path(PATH_TO_GECKO_DRIVER).is_file():
         options = webdriver.FirefoxOptions()
@@ -72,14 +70,14 @@ def indeed_job_search(*args):
         print("Unable to find a webdriver.")
         return
 
-    browser.get('https://www.indeed.com/worldwide')
+    browser.get('https://www.indeed.com')
 
     browser.implicitly_wait(5)
 
     search_bar = browser.find_element_by_name('q')
     search_bar.send_keys(cfg['keyword'])
     search_bar = browser.find_element_by_name('l')
-    search_bar.send_keys('New York')
+    search_bar.send_keys(cfg['city'])
     search_bar.send_keys(Keys.ENTER)
 
     browser.implicitly_wait(5)
@@ -97,6 +95,7 @@ def indeed_job_search(*args):
     send_email(cfg["sender_email"], cfg["sender_password"],
                cfg["receiver_email"],
                cfg["subject_email"],
+               cfg["body_email"],
                "job_search.txt")
 
     browser.close()
