@@ -1,17 +1,20 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from pathlib import Path
-from config import cfg
-import sys
 import smtplib
-from email.message import EmailMessage
-from email.mime.text import MIMEText
+import sys
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from os.path import basename
+from pathlib import Path
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+from config import cfg
 
 
-def send_email(sender_email_address, email_password, receiver_email_address, email_subject, email_body, file_path):
+def send_email(sender_email_address, email_password,
+               receiver_email_address, email_subject,
+               email_body, file_path):
     """
     sender_email_address: sender email address
     email_password: sender email password
@@ -60,12 +63,14 @@ def indeed_job_search(*args):
         options = webdriver.FirefoxOptions()
         if 'headless' in args:
             options.headless = True
-        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER, options=options)
+        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER,
+                                    options=options)
     elif Path(PATH_TO_CHROME_DRIVER).is_file():
         options = webdriver.ChromeOptions()
         if 'headless' in args:
             options.headless = True
-        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER, options=options)
+        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER,
+                                   options=options)
     else:
         print("Unable to find a webdriver.")
         return
