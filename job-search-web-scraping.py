@@ -13,17 +13,17 @@ from config import cfg
 
 
 def send_email(sender_email_address, email_password,
-               receiver_email_address, email_subject,
+               receiver_email_address, email_subject, email_smtp,
                email_body, file_path):
     """
     sender_email_address: sender email address
     email_password: sender email password
     receiver_email_address: receiver email password
     email_subject: email subject
+    email_smtp: email smtp server
     email_body: email body
     file_path: file to attach in the email
     """
-    email_smtp = "smtp.gmail.com"
     # create an email message object
     message = MIMEMultipart()
     # configure email headers
@@ -34,8 +34,7 @@ def send_email(sender_email_address, email_password,
     # attach the text file
     message.attach(MIMEText(email_body))
     part = MIMEApplication(open(file_path).read())
-    part.add_header('Content-Disposition',
-                    'attachment; filename="%s"' % basename(file_path))
+    part.add_header('Content-Disposition', 'attachment; filename="%s"' % basename(file_path))
     message.attach(part)
 
     # set smtp server and port
@@ -57,20 +56,18 @@ def indeed_job_search(*args):
     browser = None
 
     PATH_TO_GECKO_DRIVER = './geckodriver'
-    PATH_TO_CHROME_DRIVER = '/usr/local/bin/chromedriver'
+    PATH_TO_CHROME_DRIVER = './chromedriver'
 
     if Path(PATH_TO_GECKO_DRIVER).is_file():
         options = webdriver.FirefoxOptions()
         if 'headless' in args:
             options.headless = True
-        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER,
-                                    options=options)
+        browser = webdriver.Firefox(executable_path=PATH_TO_GECKO_DRIVER, options=options)
     elif Path(PATH_TO_CHROME_DRIVER).is_file():
         options = webdriver.ChromeOptions()
         if 'headless' in args:
             options.headless = True
-        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER,
-                                   options=options)
+        browser = webdriver.Chrome(executable_path=PATH_TO_CHROME_DRIVER, options=options)
     else:
         print("Unable to find a webdriver.")
         return
@@ -100,6 +97,7 @@ def indeed_job_search(*args):
     send_email(cfg["sender_email"], cfg["sender_password"],
                cfg["receiver_email"],
                cfg["subject_email"],
+               cfg["email_smtp"],
                cfg["body_email"],
                "job_search.txt")
 
