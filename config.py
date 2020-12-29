@@ -2,12 +2,12 @@
 configuration file
 """
 cfg = {
-    "keyword": "Machine Learning",
-    "city": "Berkenthin",
+    "keyword": "",
+    "city": "",
     "sender_password": "",
     "sender_email": "",
     "receiver_email": "",
-    "email_smtp": "smtp.gmail.com",
+    "email_smtp": "",
     "subject_email": "",
     "body_email": ""
 }
