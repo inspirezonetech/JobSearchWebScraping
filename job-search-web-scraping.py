@@ -31,14 +31,21 @@ def send_email(sender_email_address, email_password,
     message['From'] = sender_email_address
     message['To'] = receiver_email_address
 
-    # attach the text file
+    # attach text in email body
+    text = MIMEText(open(file_path).read(), "plain")
+    message.attach(text)
     message.attach(MIMEText(email_body))
-    part = MIMEApplication(open(file_path).read())
+    
+    # attach the text file
+    part = MIMEApplication()
     part.add_header('Content-Disposition', 'attachment; filename="%s"' % basename(file_path))
     message.attach(part)
 
     # set smtp server and port
-    server = smtplib.SMTP(email_smtp, '587')
+    server = smtplib.SMTP(email_smtp, '587') # SUGGEST TO ENABLE THE PORT VIA CONFIG (PARAMETER)
+
+    #server = smtplib.SMTP_SSL(email_smtp, '587') THIS OTHER WAY TO SEND SECURE EMAILS COMMENTING LINES 50-52-53
+
     # identify this client to the SMTP server
     server.ehlo()
     # secure the SMTP connection
