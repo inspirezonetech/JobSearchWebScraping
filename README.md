@@ -55,3 +55,6 @@ You can run the program in headless mode adding the *headless* argument
 python job-search-web-scraping.py headless
 ```
 
+### For windows
+
+Make sure that you download the correct browser driver version for your os, and for Windows make sure that it extensions is .exe 

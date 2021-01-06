@@ -1,5 +1,7 @@
 import smtplib
 import sys
+import os
+
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -62,8 +64,14 @@ def send_email(sender_email_address, email_password,
 def indeed_job_search(*args):
     browser = None
 
-    PATH_TO_GECKO_DRIVER = './geckodriver'
-    PATH_TO_CHROME_DRIVER = './chromedriver'
+    # checking if os is windows
+    if os.name == 'nt':
+        PATH_TO_GECKO_DRIVER = './geckodriver.exe'
+        PATH_TO_CHROME_DRIVER = './chromedriver.exe'
+    else:
+        PATH_TO_GECKO_DRIVER = './geckodriver'
+        PATH_TO_CHROME_DRIVER = './chromedriver'
+
 
     if Path(PATH_TO_GECKO_DRIVER).is_file():
         options = webdriver.FirefoxOptions()
