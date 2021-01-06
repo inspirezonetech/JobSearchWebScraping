@@ -37,7 +37,7 @@ def send_email(sender_email_address, email_password,
     message.attach(MIMEText(email_body))
     
     # attach the text file
-    part = MIMEApplication()
+    part = MIMEApplication(open(file_path).read())
     part.add_header('Content-Disposition', 'attachment; filename="%s"' % basename(file_path))
     message.attach(part)
 
