@@ -41,10 +41,8 @@ def send_email(sender_email_address, email_password,
     part = MIMEApplication(open(file_path).read())
     part.add_header('Content-Disposition', 'attachment; filename="%s"' % basename(file_path))
     message.attach(part)
-    # set smtp server and port (SUGGEST TO ENABLE THE PORT VIA CONFIG (PARAMETER))
+    # set smtp server and port
     server = smtplib.SMTP(email_smtp, '587')
-
-    # server = smtplib.SMTP_SSL(email_smtp, '587') THIS OTHER WAY TO SEND SECURE EMAILS COMMENTING LINES 50-52-53
 
     # identify this client to the SMTP server
     server.ehlo()
