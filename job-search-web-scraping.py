@@ -1,5 +1,7 @@
 import smtplib
 import sys
+import os
+
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -31,14 +33,17 @@ def send_email(sender_email_address, email_password,
     message['From'] = sender_email_address
     message['To'] = receiver_email_address
 
-    # attach the text file
+    # attach text in email body
+    text = MIMEText(open(file_path).read(), "plain")
+    message.attach(text)
     message.attach(MIMEText(email_body))
+    # attach the text file
     part = MIMEApplication(open(file_path).read())
     part.add_header('Content-Disposition', 'attachment; filename="%s"' % basename(file_path))
     message.attach(part)
-
     # set smtp server and port
     server = smtplib.SMTP(email_smtp, '587')
+
     # identify this client to the SMTP server
     server.ehlo()
     # secure the SMTP connection
@@ -55,8 +60,13 @@ def send_email(sender_email_address, email_password,
 def indeed_job_search(*args):
     browser = None
 
-    PATH_TO_GECKO_DRIVER = './geckodriver'
-    PATH_TO_CHROME_DRIVER = './chromedriver'
+    # checking if os is windows
+    if os.name == 'nt':
+        PATH_TO_GECKO_DRIVER = './geckodriver.exe'
+        PATH_TO_CHROME_DRIVER = './chromedriver.exe'
+    else:
+        PATH_TO_GECKO_DRIVER = './geckodriver'
+        PATH_TO_CHROME_DRIVER = './chromedriver'
 
     if Path(PATH_TO_GECKO_DRIVER).is_file():
         options = webdriver.FirefoxOptions()
