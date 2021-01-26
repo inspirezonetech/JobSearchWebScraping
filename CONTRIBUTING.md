@@ -6,7 +6,7 @@ All inputs are welcome!
 
 [inspirezone.tech](https://inspirezone.tech) is an online tech blog and community that focuses on encouraging developers of all levels of experience to improve their skills through online collaboration.
 
-You can join the inspirezone community by [using this form](https://inspirezone.tech/get-in-touch/#join) on our website. 
+Consider [joining the inspirezone community!](https://community.inspirezone.tech/)
 You don't have to join to contribute to this project. However, joining will give you a number of advantages such as:
 - You can join our Github community page
 - Have discussions with other members of our community
