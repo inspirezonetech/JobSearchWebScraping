@@ -21,7 +21,8 @@ This is a web scraper written in python using the [selenium](https://www.seleniu
 
 ## How to use
 
-### Download browser and driver 
+### Step 1: Download browser and driver 
+
 You need to have either Firefox or Chrome installed. You also need the corresponding driver for the browser.
 
 For Firefox download geckodriver:
@@ -30,7 +31,7 @@ https://github.com/mozilla/geckodriver/releases
 For Chrome download chromedriver:
 https://chromedriver.chromium.org/downloads
 
-### Setup Python and modules
+### Step 2: Setup Python and modules
 
 Python and the following modules must be installed on the computer running this script.
 
@@ -45,7 +46,7 @@ Install selenium:
 pip install selenium
 ```
 
-### Run program
+### Step 3: Run program
 
 ```
 python job-search-web-scraping.py
